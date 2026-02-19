@@ -259,6 +259,21 @@ set(GZ_SIM_GUI_PLUGIN_INSTALL_DIR
 )
 
 #============================================================================
+# Options to enable Zenoh and Flatbuffers support
+#============================================================================
+option(ENABLE_ZENOH "Build support for Zenoh" OFF)
+option(ENABLE_FLATBUFFERS "Build support for Flatbuffers" OFF)
+
+if (ENABLE_ZENOH)
+  find_package(zenohc REQUIRED)
+endif()
+
+if (ENABLE_FLATBUFFERS)
+  find_package(FlatBuffers REQUIRED)
+  set(FLATC_EXECUTABLE FlatBuffers::flatc)
+endif()
+
+#============================================================================
 # Configure the build
 #============================================================================
 gz_configure_build(QUIT_IF_BUILD_ERRORS)
